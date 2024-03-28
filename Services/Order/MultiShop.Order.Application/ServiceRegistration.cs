@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Create;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Delete;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Update;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetById;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetList;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Create;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Delete;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Update;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetById;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetList;
 using System.Reflection;
+using static MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Create.CreateAddressCommand;
+using static MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Delete.DeleteAddressCommand;
+using static MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Update.UpdateAddressCommand;
+using static MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetById.GetByIdAddressQuery;
+using static MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetList.GetListAddressQuery;
+using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Create.CreateOrderDetailCommand;
+using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Delete.DeleteOrderDetailCommand;
+using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Update.UpdateOrderDetailCommand;
+using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetById.GetByIdOrderDetailQuery;
+using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetList.GetListOrderDetailQuery;
 
 namespace MultiShop.Order.Application
 {
@@ -20,19 +20,23 @@ namespace MultiShop.Order.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<CreateAddressCommand>();
-            services.AddScoped<UpdateAddressCommand>();
-            services.AddScoped<DeleteAddressCommand>();
-            services.AddScoped<GetListAddressQuery>();
-            services.AddScoped<GetByIdAddressQuery>();
+             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly));
 
-            services.AddScoped<CreateOrderDetailCommand>();
-            services.AddScoped<UpdateOrderDetailCommand>();
-            services.AddScoped<DeleteOrderDetailCommand>();
-            services.AddScoped<GetListOrderDetailQuery>();
-            services.AddScoped<GetByIdOrderDetailQuery>();
+            services.AddScoped<GetListAddressQueryHandler>();
+            services.AddScoped<GetByIdAddressQueryHandler>();
+            services.AddScoped<CreateAddressCommandHandler>();
+            services.AddScoped<UpdateAddressCommandHandler>();
+            services.AddScoped<DeleteAddressCommandHandler>();
 
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly));
+
+            services.AddScoped<GetListOrderDetailQueryHandler>();
+            services.AddScoped<GetByIdOrderDetailQueryHandler>();
+            services.AddScoped<CreateOrderDetailCommandHandler>();
+            services.AddScoped<UpdateOrderDetailCommandHandler>();
+            services.AddScoped<DeleteOrderDetailCommandHandler>();
+
+
+
 
             //services.AddMediatR(configuration =>
             //{

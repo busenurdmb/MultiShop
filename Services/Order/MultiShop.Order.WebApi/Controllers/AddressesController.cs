@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Create;
 using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Delete;
 using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Update;
 using MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetById;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetList;
 using static MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Create.CreateAddressCommand;
 using static MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Delete.DeleteAddressCommand;
 using static MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Update.UpdateAddressCommand;
 using static MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetById.GetByIdAddressQuery;
 using static MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetList.GetListAddressQuery;
 
-namespace MultiShop.Order.Presentation.Controllers
+namespace MultiShop.Order.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -49,21 +47,21 @@ namespace MultiShop.Order.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAddress(CreateAddressCommand command)
         {
-            var values= await _createAddressCommandHandler.Handle(command);
+            var values = await _createAddressCommandHandler.Handle(command);
             return Ok(values);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateAddress(UpdateAddressCommand command)
         {
-           var values= await _updateAddressCommandHandler.Handle(command);
+            var values = await _updateAddressCommandHandler.Handle(command);
             return Ok(values);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteAddress(int id)
         {
-          var values= await _removeAddressCommandHandler.Handle(new DeleteAddressCommand(id));
+            var values = await _removeAddressCommandHandler.Handle(new DeleteAddressCommand(id));
             return Ok(values);
         }
     }

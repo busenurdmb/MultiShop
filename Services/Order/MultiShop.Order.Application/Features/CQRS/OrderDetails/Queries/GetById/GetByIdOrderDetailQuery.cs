@@ -9,16 +9,16 @@ namespace MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetById
     {
         public int Id { get; set; }
 
-        public GetByIdOrderDetailQuery(int ıd)
+        public GetByIdOrderDetailQuery(int id)
         {
-            Id = ıd;
+            Id = id;
         }
-        public class GetByIdOrderDetailQueryHandle
+        public class GetByIdOrderDetailQueryHandler
         {
             private readonly IOrderDetailRepository _OrderDetailRepository;
             private readonly IMapper _mapper;
 
-            public GetByIdOrderDetailQueryHandle(IOrderDetailRepository OrderDetailRepository, IMapper mapper)
+            public GetByIdOrderDetailQueryHandler(IOrderDetailRepository OrderDetailRepository, IMapper mapper)
             {
                 _OrderDetailRepository = OrderDetailRepository;
                 _mapper = mapper;

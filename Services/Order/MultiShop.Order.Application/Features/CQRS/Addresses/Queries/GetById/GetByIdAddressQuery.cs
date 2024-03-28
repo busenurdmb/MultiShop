@@ -13,9 +13,9 @@ namespace MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetById
     {
         public int Id { get; set; }
 
-        public GetByIdAddressQuery(int ıd)
+        public GetByIdAddressQuery(int id)
         {
-            Id = ıd;
+            Id = id;
         }
       public class GetByIdAddressQueryHandler
         {

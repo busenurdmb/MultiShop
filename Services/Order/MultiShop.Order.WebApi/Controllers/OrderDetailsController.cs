@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Create;
 using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Delete;
 using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Update;
@@ -10,20 +9,19 @@ using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Upd
 using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetById.GetByIdOrderDetailQuery;
 using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetList.GetListOrderDetailQuery;
 
-
-namespace MultiShop.Order.Presentation.Controllers
+namespace MultiShop.Order.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class OrderDetailsController : ControllerBase
     {
         private readonly GetListOrderDetailQueryHandler _getOrderDetailQueryHandler;
-        private readonly GetByIdOrderDetailQueryHandle _getOrderDetailByIdQueryHandler;
+        private readonly GetByIdOrderDetailQueryHandler _getOrderDetailByIdQueryHandler;
         private readonly CreateOrderDetailCommandHandler _createOrderDetailCommandHandler;
         private readonly UpdateOrderDetailCommandHandler _updateOrderDetailCommandHandler;
         private readonly DeleteOrderDetailCommandHandler _removeOrderDetailCommandHandler;
 
-        public OrderDetailsController(GetListOrderDetailQueryHandler getOrderDetailQueryHandler, GetByIdOrderDetailQueryHandle getOrderDetailByIdQueryHandler, CreateOrderDetailCommandHandler createOrderDetailCommandHandler, UpdateOrderDetailCommandHandler updateOrderDetailCommandHandler, DeleteOrderDetailCommandHandler removeOrderDetailCommandHandler)
+        public OrderDetailsController(GetListOrderDetailQueryHandler getOrderDetailQueryHandler, GetByIdOrderDetailQueryHandler getOrderDetailByIdQueryHandler, CreateOrderDetailCommandHandler createOrderDetailCommandHandler, UpdateOrderDetailCommandHandler updateOrderDetailCommandHandler, DeleteOrderDetailCommandHandler removeOrderDetailCommandHandler)
         {
             _getOrderDetailQueryHandler = getOrderDetailQueryHandler;
             _getOrderDetailByIdQueryHandler = getOrderDetailByIdQueryHandler;
