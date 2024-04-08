@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Create;
 using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Delete;
 using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Update;
@@ -11,6 +12,7 @@ using static MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetL
 
 namespace MultiShop.Order.WebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderDetailsController : ControllerBase

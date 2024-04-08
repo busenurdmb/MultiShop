@@ -1,19 +1,19 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.Order.Application;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Create;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Delete;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Commands.Update;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetById;
-using MultiShop.Order.Application.Features.CQRS.Addresses.Queries.GetList;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Create;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Delete;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Commands.Update;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetById;
-using MultiShop.Order.Application.Features.CQRS.OrderDetails.Queries.GetList;
+
 using MultiShop.Order.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceOrder";
+    opt.RequireHttpsMetadata = false;
+});
 
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
@@ -37,6 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
