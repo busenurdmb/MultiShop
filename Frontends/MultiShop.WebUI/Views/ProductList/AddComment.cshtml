@@ -1,4 +1,4 @@
-﻿<div class="col-md-6">
+﻿@* <div class="col-md-6">
     <h4 class="mb-4">Bir Yorum Bırakın</h4>
     <small>Yorumunuzun alınması için geçerli bir email adresi giriniz.*</small>
     <div class="d-flex my-3">
@@ -28,4 +28,104 @@
             <input type="submit" value="Yorum Yap" class="btn btn-primary px-3">
         </div>
     </form>
+</div> *@
+<div class="col-md-6">
+    <h4 class="mb-4">Bir Yorum Bırakın</h4>
+    <small>Yorumunuzun alınması için geçerli bir email adresi giriniz *</small>
+    <form id="commentForm">
+        <div class="form-group">
+            <div class="d-flex my-3">
+                <p class="mb-0 mr-2">Ürün Puanınız :</p>
+                <div class="text-primary" id="ratingStars">
+                    <i class="far fa-star star" data-index="1"></i>
+                    <i class="far fa-star star" data-index="2"></i>
+                    <i class="far fa-star star" data-index="3"></i>
+                    <i class="far fa-star star" data-index="4"></i>
+                    <i class="far fa-star star" data-index="5"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Yorumunuz *</label>
+            <textarea id="message" name="commentDetail" cols="30" rows="5" class="form-control" placeholder="Yorumunuz..." required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="name">ProductId *</label>
+            <input type="text" name="productId" class="form-control" value="@ViewBag.ProductId" readonly>
+        </div>
+        <div class="form-group">
+            <label for="name">Adınız Soyadınız *</label>
+            <input type="text" name="nameSurname" class="form-control" id="name" placeholder="Adınız Soyadınız" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Adresiniz *</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="örnekmailadresi@adres.com" required>
+        </div>
+        <div class="form-group mb-0">
+            <input type="submit" value="Yorum Yapın" class="btn btn-primary px-3">
+        </div>
+    </form>
 </div>
+
+<script>
+    const stars = document.querySelectorAll('.star');
+
+    stars.forEach((star) => {
+        star.addEventListener('click', (e) => {
+            const clickedStarIndex = parseInt(e.target.getAttribute('data-index'));
+            stars.forEach((star, index) => {
+                if (index < clickedStarIndex) {
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+    document.getElementById('commentForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        
+        const stars = document.querySelectorAll('.star');
+        let rating = 0;
+        stars.forEach((star) => {
+            if (star.classList.contains('fas')) {
+                rating = star.getAttribute('data-index');
+            }
+        });
+
+        
+        const formData = new FormData(this);
+        formData.append('rating', rating);
+
+        
+        fetch('/ProductList/AddComment', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data === true) {
+                    location.reload();
+                } else {
+                    console.error('Error: Comment could not be added.');
+                }
+                
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>

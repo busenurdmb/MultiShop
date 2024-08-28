@@ -14,10 +14,10 @@ namespace MultiShop.Discount.Context
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-493DFJA\\SQLEXPRESS;initial Catalog=MultiShopDiscountDb;integrated Security=true;TrustServerCertificate=True;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-493DFJA\\SQLEXPRESS;initial Catalog=MultiShopDiscountDb;integrated Security=true;TrustServerCertificate=True;");
+        //}
         public DbSet<Coupon> Coupons{ get; set; }
         public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
     }

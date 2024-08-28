@@ -32,29 +32,29 @@ namespace MultiShop.WebUI.Controllers
             return View();
         }
 
-        [HttpGet]
-        public PartialViewResult AddComment()
-        {
-            return PartialView();
-        }
+        //[HttpGet]
+        //public PartialViewResult AddComment()
+        //{
+        //    return PartialView();
+        //}
 
         [HttpPost]
-        public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto)
+        public async Task<bool> AddComment(CreateCommentDto createCommentDto)
         {
             createCommentDto.ImageUrl = "test";
-            createCommentDto.Rating = 1;
+            //createCommentDto.Rating = 1;
             createCommentDto.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            createCommentDto.Status = false;
-            createCommentDto.ProductId = "66033171da061a1682dbbc75";
+            //createCommentDto.Status = false;
+            //createCommentDto.ProductId = "66033171da061a1682dbbc75";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createCommentDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("https://localhost:7005/api/Comments", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Default");
+                return true;
             }
-            return View();
+            return false;
         }
     }
 }
