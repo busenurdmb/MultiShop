@@ -55,7 +55,7 @@ namespace MultiShop.IdentityServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("multishopsecret".Sha256()) },
 
-                    AllowedScopes = { "CatalogReadPermission"}
+                    AllowedScopes = { "CatalogReadPermission" }
                 },
 
                 //Manager
