@@ -5,7 +5,7 @@ namespace MultiShop.WebUI.Services.CatalogServices.FeatureSliderServices
 {
     public class FeatureSliderService : IFeatureSliderService
     {
-        string featuresliders = "https://localhost:7070/api/FeatureSliders";
+        //string featuresliders = "https://localhost:7070/api/FeatureSliders";
         private readonly HttpClient _httpClient;
         public FeatureSliderService(HttpClient httpClient)
         {
@@ -13,28 +13,28 @@ namespace MultiShop.WebUI.Services.CatalogServices.FeatureSliderServices
         }
         public async Task CreateFeatureSliderAsync(CreateFeatureSliderDto createFeatureSliderDto)
         {
-            await _httpClient.PostAsJsonAsync<CreateFeatureSliderDto>(featuresliders, createFeatureSliderDto);
+            await _httpClient.PostAsJsonAsync<CreateFeatureSliderDto>("featuresliders", createFeatureSliderDto);
         }
         public async Task DeleteFeatureSliderAsync(string id)
         {
-            await _httpClient.DeleteAsync(featuresliders+"?id=" + id);
+            await _httpClient.DeleteAsync("featuresliders" + "?id=" + id);
         }
         public async Task<UpdateFeatureSliderDto> GetByIdFeatureSliderAsync(string id)
         {
-            var responseMessage = await _httpClient.GetAsync(featuresliders+"/" + id);
+            var responseMessage = await _httpClient.GetAsync("featuresliders/ " + id);
             var values = await responseMessage.Content.ReadFromJsonAsync<UpdateFeatureSliderDto>();
             return values;
         }
         public async Task<List<ResultFeatureSliderDto>> GetAllFeatureSliderAsync()
         {
-            var responseMessage = await _httpClient.GetAsync(featuresliders);
+            var responseMessage = await _httpClient.GetAsync("featuresliders");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultFeatureSliderDto>>(jsonData);
             return values;
         }
         public async Task UpdateFeatureSliderAsync(UpdateFeatureSliderDto updateFeatureSliderDto)
         {
-            await _httpClient.PutAsJsonAsync<UpdateFeatureSliderDto>(featuresliders, updateFeatureSliderDto);
+            await _httpClient.PutAsJsonAsync<UpdateFeatureSliderDto>("featuresliders", updateFeatureSliderDto);
         }
 
         public Task FeatureSliderChageStatusToTrue(string id)

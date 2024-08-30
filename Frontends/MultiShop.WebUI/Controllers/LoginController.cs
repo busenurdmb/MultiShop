@@ -76,6 +76,9 @@ namespace MultiShop.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(SignInDto signInDto)
         {
+            signInDto.Username = "ali01";
+            signInDto.Password = "1111aA*";
+                
             await _identityService.SignIn(signInDto);
             return RedirectToAction("Index", "User");
         }

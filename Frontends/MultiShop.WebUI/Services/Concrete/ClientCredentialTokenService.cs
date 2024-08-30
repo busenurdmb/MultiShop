@@ -29,6 +29,7 @@ namespace MultiShop.WebUI.Services.Concrete
             {
                 return token1.AccessToken;
             }
+
             var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
                 Address = _serviceApiSettings.IdentityServerUrl,

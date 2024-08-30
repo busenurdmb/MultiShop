@@ -5,7 +5,7 @@ namespace MultiShop.WebUI.Services.CatalogServices.AboutServices
 {
     public class AboutService : IAboutService
     {
-        string abouts = "https://localhost:7070/api/Abouts";
+        //string abouts = "https://localhost:7070/api/Abouts";
 
         private readonly HttpClient _httpClient;
         public AboutService(HttpClient httpClient)
@@ -14,28 +14,28 @@ namespace MultiShop.WebUI.Services.CatalogServices.AboutServices
         }
         public async Task CreateAboutAsync(CreateAboutDto createAboutDto)
         {
-            await _httpClient.PostAsJsonAsync<CreateAboutDto>(abouts, createAboutDto);
+            await _httpClient.PostAsJsonAsync<CreateAboutDto>("abouts", createAboutDto);
         }
         public async Task DeleteAboutAsync(string id)
         {
-            await _httpClient.DeleteAsync(abouts+"?id=" + id);
+            await _httpClient.DeleteAsync("abouts" + "?id=" + id);
         }
         public async Task<UpdateAboutDto> GetByIdAboutAsync(string id)
         {
-            var responseMessage = await _httpClient.GetAsync(abouts+"/" + id);
+            var responseMessage = await _httpClient.GetAsync("abouts/" + id);
             var values = await responseMessage.Content.ReadFromJsonAsync<UpdateAboutDto>();
             return values;
         }
         public async Task<List<ResultAboutDto>> GetAllAboutAsync()
         {
-            var responseMessage = await _httpClient.GetAsync(abouts);
+            var responseMessage = await _httpClient.GetAsync("abouts");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
             return values;
         }
         public async Task UpdateAboutAsync(UpdateAboutDto updateAboutDto)
         {
-            await _httpClient.PutAsJsonAsync<UpdateAboutDto>(abouts, updateAboutDto);
+            await _httpClient.PutAsJsonAsync<UpdateAboutDto>("abouts", updateAboutDto);
         }
     }
 }
