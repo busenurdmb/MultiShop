@@ -30,7 +30,7 @@ builder.Services.AddSingleton<RedisService>(sp =>
     return redis;
 });
 // Add services to the container.
-
+//proje seviyesinde authentication
 builder.Services.AddControllers(opt =>
 {
     opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
