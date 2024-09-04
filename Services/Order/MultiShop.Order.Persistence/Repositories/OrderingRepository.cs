@@ -1,4 +1,5 @@
-﻿using MultiShop.Order.Application.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using MultiShop.Order.Application.Repositories;
 using MultiShop.Order.Domain.Entities;
 using MultiShop.Order.Persistence.Context;
 using System;
@@ -13,6 +14,12 @@ namespace MultiShop.Order.Persistence.Repositories
     {
         public OrderingRepository(OrderContext context) : base(context)
         {
+        }
+
+        public async Task<List<Ordering>> GetByUserIdAsync(string id)
+        {
+            var values =_context.Orderings.Where(x=> x.UserId == id).ToListAsync();
+            return await values;
         }
     }
 }

@@ -7,6 +7,7 @@ using MultiShop.Order.Application.Features.Mediator.Orderings.Commands.Delete;
 using MultiShop.Order.Application.Features.Mediator.Orderings.Commands.Update;
 using MultiShop.Order.Application.Features.Mediator.Orderings.Queries.GetById;
 using MultiShop.Order.Application.Features.Mediator.Orderings.Queries.GetList;
+using MultiShop.Order.Application.Features.Mediator.Orderings.Queries.GetOrderingByUserId;
 
 namespace MultiShop.Order.WebApi.Controllers
 {
@@ -40,8 +41,12 @@ namespace MultiShop.Order.WebApi.Controllers
                 var value = await _mediator.Send(new GetByIdOrderingQuery(id));
                 return Ok(value);
             }
-
-            [HttpPost]
+        [HttpGet("GetOrderingByUserId/{id}")]
+        public async Task<IActionResult> GetOrderingByUserId(string id)
+        {var value = await _mediator.Send(new GetOrderingByUserIdQuery(id));
+            return Ok(value);
+        }
+        [HttpPost]
             public async Task<IActionResult> Add(CreateOrderingCommand createdOrderingCommand)
             {
                 CreateOrderingResponse response = await _mediator.Send(createdOrderingCommand);

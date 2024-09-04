@@ -24,11 +24,61 @@
     <None Include="wwwroot\MainDownload-OvioAdmin-html5-template\html\maps\et-line-font\fonts\.DS_Store" />
     <None Include="wwwroot\MainDownload-OvioAdmin-html5-template\html\pages\et-line-font\fonts\.DS_Store" />
     <None Include="wwwroot\MainDownload-OvioAdmin-html5-template\html\tables\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\spica\.DS_Store" />
+    <None Include="wwwroot\spica\.git\COMMIT_EDITMSG" />
+    <None Include="wwwroot\spica\.git\config" />
+    <None Include="wwwroot\spica\.git\description" />
+    <None Include="wwwroot\spica\.git\FETCH_HEAD" />
+    <None Include="wwwroot\spica\.git\HEAD" />
+    <None Include="wwwroot\spica\.git\hooks\applypatch-msg.sample" />
+    <None Include="wwwroot\spica\.git\hooks\commit-msg.sample" />
+    <None Include="wwwroot\spica\.git\hooks\fsmonitor-watchman.sample" />
+    <None Include="wwwroot\spica\.git\hooks\post-update.sample" />
+    <None Include="wwwroot\spica\.git\hooks\pre-applypatch.sample" />
+    <None Include="wwwroot\spica\.git\hooks\pre-commit.sample" />
+    <None Include="wwwroot\spica\.git\hooks\pre-merge-commit.sample" />
+    <None Include="wwwroot\spica\.git\hooks\pre-push.sample" />
+    <None Include="wwwroot\spica\.git\hooks\pre-rebase.sample" />
+    <None Include="wwwroot\spica\.git\hooks\pre-receive.sample" />
+    <None Include="wwwroot\spica\.git\hooks\prepare-commit-msg.sample" />
+    <None Include="wwwroot\spica\.git\hooks\push-to-checkout.sample" />
+    <None Include="wwwroot\spica\.git\hooks\update.sample" />
+    <None Include="wwwroot\spica\.git\index" />
+    <None Include="wwwroot\spica\.git\info\exclude" />
+    <None Include="wwwroot\spica\.git\info\refs" />
+    <None Include="wwwroot\spica\.git\logs\HEAD" />
+    <None Include="wwwroot\spica\.git\logs\refs\heads\main" />
+    <None Include="wwwroot\spica\.git\logs\refs\remotes\origin\main" />
+    <None Include="wwwroot\spica\.git\objects\8e\47f54e5dfa8210cfde12899344ce0dfcd7baf6" />
+    <None Include="wwwroot\spica\.git\objects\ae\0cfa4f473eca984e4ed547304b8aefe079c9df" />
+    <None Include="wwwroot\spica\.git\objects\df\f30cc2a05e6359cf5eb96cb7a3b388b26176cd" />
+    <None Include="wwwroot\spica\.git\objects\info\commit-graph" />
+    <None Include="wwwroot\spica\.git\objects\info\packs" />
+    <None Include="wwwroot\spica\.git\objects\pack\pack-0566f8b2c18369b55d4923b5b0bb06223e9ee461.idx" />
+    <None Include="wwwroot\spica\.git\objects\pack\pack-0566f8b2c18369b55d4923b5b0bb06223e9ee461.pack" />
+    <None Include="wwwroot\spica\.git\packed-refs" />
+    <None Include="wwwroot\spica\.git\refs\heads\main" />
+    <None Include="wwwroot\spica\.git\refs\remotes\origin\main" />
+    <None Include="wwwroot\spica\css\.DS_Store" />
+    <None Include="wwwroot\spica\fonts\.DS_Store" />
+    <None Include="wwwroot\spica\fonts\Roboto\.DS_Store" />
+    <None Include="wwwroot\spica\images\.DS_Store" />
+    <None Include="wwwroot\spica\images\auth\.DS_Store" />
+    <None Include="wwwroot\spica\images\faces\.DS_Store" />
+    <None Include="wwwroot\spica\js\.DS_Store" />
+    <None Include="wwwroot\spica\pages\.DS_Store" />
+    <None Include="wwwroot\spica\scss\.DS_Store" />
+    <None Include="wwwroot\spica\scss\components\.DS_Store" />
+    <None Include="wwwroot\spica\template\.DS_Store" />
+    <None Include="wwwroot\spica\vendors\.DS_Store" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\User\Data\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="wwwroot\spica\.git\refs\tags\" />
   </ItemGroup>
 
   <ItemGroup>

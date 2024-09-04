@@ -4,6 +4,7 @@ using MultiShop.Order.Application.Features.Mediator.Orderings.Commands.Delete;
 using MultiShop.Order.Application.Features.Mediator.Orderings.Commands.Update;
 using MultiShop.Order.Application.Features.Mediator.Orderings.Queries.GetById;
 using MultiShop.Order.Application.Features.Mediator.Orderings.Queries.GetList;
+using MultiShop.Order.Application.Features.Mediator.Orderings.Queries.GetOrderingByUserId;
 using MultiShop.Order.Domain.Entities;
 
 namespace MultiShop.Order.Application.Features.Mediator.Orderings.Profiles
@@ -24,6 +25,9 @@ namespace MultiShop.Order.Application.Features.Mediator.Orderings.Profiles
             CreateMap<Ordering, 
 GetListOrderingResponse>().ReverseMap();
             CreateMap<Ordering, GetByIdOrderingResponse>().ReverseMap();
+
+            
+            CreateMap<Ordering, GetOrderingByUserIdResponse>().ReverseMap();
         }
     }
 }

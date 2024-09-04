@@ -15,15 +15,18 @@ namespace MultiShop.WebUI.Controllers
             _productService = productService;
             _basketService = basketService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string code, int discountRate, decimal totalNewPriceWithDiscount)
         {
+            ViewBag.code = code;
+            ViewBag.discountRate = discountRate;
+            ViewBag.totalNewPriceWithDiscount = totalNewPriceWithDiscount;
             ViewBag.directory1 = "Ana Sayfa";
             ViewBag.directory2 = "Ürünler";
             ViewBag.directory3 = "Sepetim";
             var values = await _basketService.GetBasket();
-            ViewBag.total = values.TotalPrice;
-            var totalPriceWithTax = values.TotalPrice + values.TotalPrice / 100 * 10;
-            var tax = values.TotalPrice / 100 * 10;
+            ViewBag.total = values.TotalPrice; //toplam ürün fiyatı
+            var totalPriceWithTax = values.TotalPrice + values.TotalPrice / 100 * 10; //kdvli fiyat
+            var tax = values.TotalPrice / 100 * 10; //kdv
             ViewBag.totalPriceWithTax = totalPriceWithTax;
             ViewBag.tax = tax;
             return View();
