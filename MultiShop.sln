@@ -59,15 +59,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RapidApi", "RapidApi", "{A36EE94D-1737-4A6A-B130-EE8E93B35EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.OcelotGateway", "ApiGateway\MultiShop.OcelotGateway\MultiShop.OcelotGateway.csproj", "{D0E4A994-3454-4E7C-9E4F-F01B39B71D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.OcelotGateway", "ApiGateway\MultiShop.OcelotGateway\MultiShop.OcelotGateway.csproj", "{D0E4A994-3454-4E7C-9E4F-F01B39B71D1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{D184BCC4-86F0-40B2-934E-5716F27788D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{E0A2106C-B3DE-4C7E-B71B-DE6558FCFA9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Payment", "Services\Payment\MultiShop.Payment\MultiShop.Payment.csproj", "{0A361048-45CC-4661-95A4-5BDAA0590007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.Payment", "Services\Payment\MultiShop.Payment\MultiShop.Payment.csproj", "{0A361048-45CC-4661-95A4-5BDAA0590007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Images", "Services\Images\MultiShop.Images\MultiShop.Images.csproj", "{AE4E6A49-FE6B-49D3-9B8D-8A94975AFEE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.Images", "Services\Images\MultiShop.Images\MultiShop.Images.csproj", "{AE4E6A49-FE6B-49D3-9B8D-8A94975AFEE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Message", "Message", "{C4A7B368-5D31-45FE-BA43-3D6D87B16019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Message", "Message\MultiShop.Message\MultiShop.Message.csproj", "{A6125CD6-3FF0-4178-B762-60935F2D6F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +159,10 @@ Global
 		{AE4E6A49-FE6B-49D3-9B8D-8A94975AFEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE4E6A49-FE6B-49D3-9B8D-8A94975AFEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE4E6A49-FE6B-49D3-9B8D-8A94975AFEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6125CD6-3FF0-4178-B762-60935F2D6F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6125CD6-3FF0-4178-B762-60935F2D6F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6125CD6-3FF0-4178-B762-60935F2D6F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6125CD6-3FF0-4178-B762-60935F2D6F9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +196,8 @@ Global
 		{E0A2106C-B3DE-4C7E-B71B-DE6558FCFA9D} = {EA63F113-59C7-4C83-9DB3-63F4E3282DAA}
 		{0A361048-45CC-4661-95A4-5BDAA0590007} = {D184BCC4-86F0-40B2-934E-5716F27788D0}
 		{AE4E6A49-FE6B-49D3-9B8D-8A94975AFEE9} = {E0A2106C-B3DE-4C7E-B71B-DE6558FCFA9D}
+		{C4A7B368-5D31-45FE-BA43-3D6D87B16019} = {EA63F113-59C7-4C83-9DB3-63F4E3282DAA}
+		{A6125CD6-3FF0-4178-B762-60935F2D6F9A} = {C4A7B368-5D31-45FE-BA43-3D6D87B16019}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B2ED2F7-1826-4A28-94FE-EFD4969FC732}
