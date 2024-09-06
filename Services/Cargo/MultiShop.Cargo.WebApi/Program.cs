@@ -8,6 +8,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.Audience = "ResourceCargo";
     opt.RequireHttpsMetadata = false;
 });
+
 // Add services to the container.
 builder.Services.AddBuinessServices(builder.Configuration);
 builder.Services.AddControllers();

@@ -14,6 +14,14 @@ namespace MultiShop.WebUI.ViewComponents.OrderViewComponents
         {
             var basketTotal = await _basketService.GetBasket();
             var basketItems = basketTotal.BasketItems;
+
+            var values = await _basketService.GetBasket();
+            ViewBag.total = values.TotalPrice; //toplam ürün fiyatı
+            var totalPriceWithTax = values.TotalPrice + values.TotalPrice / 100 * 10; //kdvli fiyat
+            var tax = values.TotalPrice / 100 * 10; //kdv
+            ViewBag.totalPriceWithTax = totalPriceWithTax;
+            var x = totalPriceWithTax + 12;
+            ViewBag.endtotal = x;
             return View(basketItems);
         }
     }

@@ -7,7 +7,7 @@ using MultiShop.Cargo.Entities.Concrete;
 
 namespace MultiShop.Cargo.WebApi.Controllers
 {
-    [Authorize]
+   [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CargoCompaniesController : ControllerBase

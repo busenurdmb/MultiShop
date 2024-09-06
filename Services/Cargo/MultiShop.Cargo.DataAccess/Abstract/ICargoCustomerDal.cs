@@ -9,5 +9,6 @@ namespace MultiShop.Cargo.DataAccess.Abstract
 {
     public interface ICargoCustomerDal:IEntityRepository<CargoCustomer>
     {
+        CargoCustomer GetCargoCustomerById(string id);
     }
 }
