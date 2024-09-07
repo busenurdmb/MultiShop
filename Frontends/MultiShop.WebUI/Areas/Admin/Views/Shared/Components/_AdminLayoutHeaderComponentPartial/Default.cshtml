@@ -28,9 +28,10 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-envelope"></i>
-                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        <i class="icon-envelope">@ViewBag.messageCount<span class="heartbit" style="position:relative;top:-10px"><strong id="messageCount">0</strong></span><span class="point"></span></i>
                     </a>
+
+                  
                     <ul class="dropdown-menu">
                         <li class="header">You have 4 messages</li>
                         <li>
@@ -76,7 +77,7 @@
                 <!-- Notifications Menu -->
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-megaphone"></i>
+                        <i class="icon-megaphone">@ViewBag.totalCommentCount</i>
                         <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </a>
                     <ul class="dropdown-menu">
