@@ -1,0 +1,26 @@
+﻿@model CreateImageDto
+@{
+    ViewData["Title"] = "Cloud'a Resim Yükle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chart-box">
+
+            <form method="post" asp-action="CreateImage" asp-controller="ImageUpload" enctype="multipart/form-data">
+                <label>Resim Başlığı</label>
+                <input type="text" asp-for="Title" class="form-control" required />
+                <br>
+                <label>Resim Seç</label>
+                <input type="file" asp-for="Photo" required /> 
+                <br>
+                <input type="hidden" asp-for="SavedUrl" />
+                <input type="hidden" asp-for="SavedFileName" />
+                <input type="hidden" asp-for="SignedUrl" />
+                <button class="btn btn-outline btn-rounded btn-primary"><i class="fa fa-save"></i> Yükle</button>
+            </form>
+        </div>
+    </div>
+</div>

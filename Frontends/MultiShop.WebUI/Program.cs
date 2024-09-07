@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MultiShop.WebUI.ConfigOptions;
 using MultiShop.WebUI.Handlers;
 using MultiShop.WebUI.Services.BasketServices;
 using MultiShop.WebUI.Services.CargoServices.CargoCompanyServices;
@@ -18,6 +19,7 @@ using MultiShop.WebUI.Services.CatalogServices.SpecialOfferServices;
 using MultiShop.WebUI.Services.CommentServices;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.DiscountServices;
+using MultiShop.WebUI.Services.ImageServices;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Services.MessageServices;
 using MultiShop.WebUI.Services.OrderServices.OrderAddressServices;
@@ -30,6 +32,10 @@ using MultiShop.WebUI.Services.UserIdentityServices;
 using MultiShop.WebUI.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<GCSConfigOptions>(builder.Configuration);
+builder.Services.AddSingleton<ICloudStorageService, CloudStorageService>();
+
 //JwtBearerDefaults cookie configürasyonu
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
@@ -200,6 +206,10 @@ builder.Services.AddHttpClient<IContactService, ContactService>(opt =>
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
+builder.Services.AddHttpClient<IImageService, ImageService>(o =>
+{
+    o.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Image.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 // Add services to the container.
 
 

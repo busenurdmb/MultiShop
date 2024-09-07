@@ -1,5 +1,35 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
+using MultiShop.Images.ConfigOptions;
+using MultiShop.Images.Context;
+using MultiShop.Images.Services;
+using MultiShop.Images.Services.ImageServices;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceImage";
+    opt.RequireHttpsMetadata = false;
+});
+builder.Services.Configure<GCSConfigOptions>(builder.Configuration);
+builder.Services.AddSingleton<ICloudStorageService, CloudStorageService>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IImageService, ImageService>();
+
+builder.Services.AddDbContext<ImagesContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddControllers(o =>
+{
+    o.Filters.Add(new AuthorizeFilter());
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -16,8 +46,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
