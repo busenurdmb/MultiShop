@@ -76,6 +76,31 @@ namespace MultiShop.WebUI.Services.Concrete
             return true;
         }
 
+        public async Task<string> GetToken()
+        {
+            var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = _serviceApiSettings.IdentityServerUrl,
+                Policy = new DiscoveryPolicy
+                {
+                    RequireHttps = false
+                }
+            });
+            var passwordTokenRequest = new PasswordTokenRequest
+            {
+                ClientId = _clientSettings.MultiShopManagerClient.ClientId,
+                ClientSecret = _clientSettings.MultiShopManagerClient.ClientSecret,
+                UserName = "ali01",
+                Password = "1111aA*",
+                Address = discoveryEndPoint.TokenEndpoint
+            };
+
+            var token = await _httpClient.RequestPasswordTokenAsync(passwordTokenRequest);
+
+
+            return token.AccessToken;
+        }
+
         public async Task<bool> SignIn(SignInDto signInDto)
         {
             var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest

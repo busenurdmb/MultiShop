@@ -13,6 +13,7 @@
         public ServiceApi Payment { get; set; }
         public ServiceApi Comment { get; set; }
         public ServiceApi Message { get; set; }
+        public ServiceApi Rabbit { get; set; }
     }
     public class ServiceApi
     {

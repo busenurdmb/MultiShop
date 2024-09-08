@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Multishop.SharedLibrary.RabbitMQEvents;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
+using MultiShop.WebUI.Services;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
 using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
@@ -14,12 +18,16 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     [Route("Admin/Product")]
     public class ProductController : Controller
     {
+        private readonly HttpClient _httpClient;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        private readonly IRabbitMQService _service;
+        public ProductController(IProductService productService, ICategoryService categoryService, HttpClient httpClient, IRabbitMQService service)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _httpClient = httpClient;
+            _service = service;
         }
         void ProductViewBagList()
         {
@@ -108,7 +116,19 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
             await _productService.UpdateProductAsync(updateProductDto);
+          var messageContent = new ProductNameChangedEvent
+            {
+                ProductId = updateProductDto.ProductId,
+                UpdatedName = updateProductDto.ProductName,
+                UpdatedPrice = updateProductDto.ProductPrice
+            };
+            await _service.RabbitMessage(messageContent);
+           
+
+
             return RedirectToAction("Index", "Product", new { area = "Admin" });
+
+
         }
     }
 }

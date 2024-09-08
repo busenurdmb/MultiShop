@@ -30,6 +30,10 @@ using MultiShop.WebUI.Services.StatisticServices.MessageStatisticServices;
 using MultiShop.WebUI.Services.StatisticServices.UserStatisticServices;
 using MultiShop.WebUI.Services.UserIdentityServices;
 using MultiShop.WebUI.Settings;
+using MassTransit;
+using MultiShop.WebUI.Consumers;
+using System.Net.Mime;
+using MultiShop.WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -111,10 +115,13 @@ builder.Services.AddHttpClient<IUserStatisticService, UserStatisticService>(opt 
 {
     opt.BaseAddress = new Uri(values.IdentityServerUrl);
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+//RabbitMQ sýrasýnda MassTransit =>arka plan iþlemlerinde HttpContext veya IHttpContextAccessor'a doðrudan eriþim saðlayamaz 
+//o yüzden basketi merkeziz tokendan çýkarýp yapmak zorunda kaldým.
 builder.Services.AddHttpClient<IBasketService, BasketService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Basket.Path}");
-}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+})/*.AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>()*/;
 
 builder.Services.AddHttpClient<IOrderOderingService, OrderOderingService>(opt =>
 {
@@ -210,7 +217,46 @@ builder.Services.AddHttpClient<IImageService, ImageService>(o =>
 {
     o.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Image.Path}");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<IRabbitMQService, RabbitMQServices>(o =>
+{
+    o.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Rabbit.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
 // Add services to the container.
+
+builder.Services.AddMassTransit(x =>
+{
+   
+  
+
+    x.AddConsumer<ProductNameChangedEventConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+
+        // Endpoint yapýlandýrmasý
+        cfg.ReceiveEndpoint("product-name-changed-event-basket-service", e =>
+        {
+            e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
+
+            // Ham JSON deserializer kullanýmý
+            e.UseRawJsonDeserializer();
+            e.DefaultContentType = new ContentType("application/json");
+
+            // Tüketim topolojisi yapýlandýrmasýný devre dýþý býrakma
+            e.ConfigureConsumeTopology = false;
+        });
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
+
 
 
 var app = builder.Build();

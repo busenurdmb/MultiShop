@@ -14,8 +14,33 @@ using MultiShop.Catalog.Services.BrandServices;
 using MultiShop.Catalog.Services.OfferDiscountServices;
 using MultiShop.Catalog.Services.ContactServices;
 using MultiShop.Catalog.Services.StatisticServices;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddMassTransit(x =>
+//{
+
+//    //default port : 5672
+//    x.UsingRabbitMq((context, cfg) =>
+//    {
+
+//        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+//        {
+
+//            host.Username("guest");
+//            host.Password("guest");
+//        });
+
+
+
+
+//    });
+
+
+//});
+//builder.Services.AddMassTransitHostedService();
+
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.Authority = builder.Configuration["IdentityServerUrl"];
