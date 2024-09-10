@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Multishop.SharedLibrary.RabbitMQEvents;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
-using MultiShop.WebUI.Services;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
 using MultiShop.WebUI.Services.CatalogServices.ProductServices;
+using MultiShop.WebUI.Services.RabbitMQServices.RabbitMQServices;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -21,8 +21,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         private readonly HttpClient _httpClient;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
-        private readonly IRabbitMQService _service;
-        public ProductController(IProductService productService, ICategoryService categoryService, HttpClient httpClient, IRabbitMQService service)
+        private readonly IRabbitMQServices _service;
+        public ProductController(IProductService productService, ICategoryService categoryService, HttpClient httpClient, IRabbitMQServices service)
         {
             _productService = productService;
             _categoryService = categoryService;

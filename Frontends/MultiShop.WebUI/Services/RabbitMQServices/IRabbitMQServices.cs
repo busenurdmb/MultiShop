@@ -1,9 +1,9 @@
 ﻿using Multishop.SharedLibrary.RabbitMQEvents;
 using MultiShop.DtoLayer.CommentDtos;
 
-namespace MultiShop.WebUI.Services
+namespace MultiShop.WebUI.Services.RabbitMQServices.RabbitMQServices
 {
-    public interface IRabbitMQService
+    public interface IRabbitMQServices
     {
         Task RabbitMessage(ProductNameChangedEvent productNameChangedEvent);
     }

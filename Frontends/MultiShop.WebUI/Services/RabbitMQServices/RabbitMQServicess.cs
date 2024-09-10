@@ -1,14 +1,15 @@
 ﻿using Multishop.SharedLibrary.RabbitMQEvents;
+using MultiShop.WebUI.Services.RabbitMQServices.RabbitMQServices;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace MultiShop.WebUI.Services
+namespace MultiShop.WebUI.Services.RabbitMQServices
 {
-    public class RabbitMQServices : IRabbitMQService
+    public class RabbitMQServicess : IRabbitMQServices
     {
         private readonly HttpClient _httpClient;
 
-        public RabbitMQServices(HttpClient httpClient)
+        public RabbitMQServicess(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
