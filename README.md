@@ -5,7 +5,7 @@ Kullanıcılar, ürünler içerisinden diledikleri ürünleri arayabilir, listel
 Alışveriş sürecinin sonunda, kullanıcılar siparişlerini güvenle oluşturabilirler. Oluşturdukları siparişleri kullanıcı panelinden takip edebilirler.
 Bu projede, kullanıcı arayüzü ve admin paneli ile öne çıkıyor.
 
-# Mikroservs Medir?
+# Mikroservis Medir?
 Mikroservis; büyük ve karmaşık uygulamaların, daha küçük ve bağımsız hizmetlere (servislere) bölünerek geliştirildiği bir yazılım mimari yaklaşımıdır. 
 Her mikroservis, belirli bir işlevi yerine getiren bağımsız bir birim olarak çalışır ve diğer mikroservislerle iletişim kurarak, tüm sistemi oluşturur.
 Bu yapı, uygulamanın ölçeklenebilirliğini, esnekliğini ve bakımı kolaylaştırır.
