@@ -16,6 +16,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.Audience = "ResourceImage";
     opt.RequireHttpsMetadata = false;
 });
+
 builder.Services.Configure<GCSConfigOptions>(builder.Configuration);
 builder.Services.AddSingleton<ICloudStorageService, CloudStorageService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -30,6 +31,7 @@ builder.Services.AddControllers(o =>
 {
     o.Filters.Add(new AuthorizeFilter());
 });
+
 // Add services to the container.
 
 builder.Services.AddControllers();

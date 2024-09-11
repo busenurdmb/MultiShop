@@ -51,7 +51,7 @@ namespace MultiShop.RabbitMQMessage.Services
             var jsonMessage = JsonSerializer.Serialize(messageContent);  // Mesajı JSON formatına dönüştürür
             Console.WriteLine($"JSON Message: {jsonMessage}");  // JSON mesajını kontrol et
             var byteMessage = Encoding.UTF8.GetBytes(jsonMessage);  // JSON verisini bayt dizisine dönüştürür
-            channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: byteMessage);  // Mesajı kuyruğa gönderir
+            channel.BasicPublish(exchange:"", routingKey: queueName, basicProperties: null, body: byteMessage);  // Mesajı kuyruğa gönderir
         }
         // Bir tüketici (consumer) oluşturur
         public EventingBasicConsumer CreateConsumer()

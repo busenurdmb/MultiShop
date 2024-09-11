@@ -24,8 +24,8 @@ namespace MultiShop.RabbitMQMessage.Controllers
         public IActionResult SendToQueue([FromBody] ProductNameChangedEvent productEvent)
         {
             // RabbitMQ'ya mesajı gönderiyoruz
-            //_service.QueueDeclare("product-name-changed-event-basket-service");
-            _service.BasicPublish("product-name-changed-event-basket-service", productEvent);
+           // _service.QueueDeclare("product-name-changed-event-basket-service1");
+            _service.BasicPublish("product-name-changed-event-basket-service1", productEvent);
 
             return Ok("Mesaj RabbitMQ'ya gönderildi.");
         }

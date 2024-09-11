@@ -95,8 +95,9 @@ builder.Services.AddMassTransit(x =>
             host.Password("guest");
         });
 
+
         // Endpoint yapýlandýrmasý
-        cfg.ReceiveEndpoint("product-name-changed-event-basket-service", e =>
+        cfg.ReceiveEndpoint("product-name-changed-event-basket-service1", e =>
         {
             e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
 

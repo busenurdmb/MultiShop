@@ -1,4 +1,5 @@
-﻿using MultiShop.DtoLayer.IdentityDtos.UserDtos;
+﻿using MultiShop.DtoLayer.CommentDtos;
+using MultiShop.DtoLayer.IdentityDtos.UserDtos;
 using MultiShop.DtoLayer.ImageDtos;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -22,6 +23,7 @@ namespace MultiShop.WebUI.Services.ImageServices
             var formContent = new MultipartFormDataContent();
             formContent.Add(new StringContent(image.Title), "Title");
             formContent.Add(new StreamContent(image.Photo.OpenReadStream()), "Photo", Path.GetFileName(image.Photo.FileName));
+            //await _client.PostAsJsonAsync<CreateCommentDto>("imageUploads", formContent);
             //await _client.PostAsync("http://localhost:7077/api/ImageUploads", formContent);
             var responseMessage = await _client.PostAsync("http://localhost:7077/api/ImageUploads", formContent);
             if (responseMessage.IsSuccessStatusCode)

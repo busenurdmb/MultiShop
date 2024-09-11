@@ -33,15 +33,15 @@
                                     <td>@item.ProductName</td>
                                     <td>@item.ProductPrice</td>
                                     <td>@item.Category.CategoryName</td>
-                                    <td><a href="/Admin/Product/DeleteProduct/@item.ProductId" class="btn btn-danger">Sil</a></td>
-                                    <td><a href="/Admin/Product/UpdateProduct/@item.ProductId" class="btn btn-success">Güncelle</a></td>
-                                    <td><a href="/Admin/ProductImage/ProductImageDetail/@item.ProductId" class="btn btn-warning">Ürün Görselleri</a></td>
-                                    <td><a href="/Admin/ProductDetail/UpdateProductDetail/@item.ProductId" class="btn btn-info">Açıklama ve Bilgi</a></td>
+                                    <td><a href="/Admin/Product/DeleteProduct/@item.ProductId" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a></td>
+                                    <td><a href="/Admin/Product/UpdateProduct/@item.ProductId" class="btn btn-success"><i class="fa fa-edit"></i> Güncelle</a></td>
+                                    <td><a href="/Admin/ProductImage/ProductImageDetail/@item.ProductId" class="btn btn-warning"><i class="fa fa-image"></i> Ürün Görselleri</a></td>
+                                    <td><a href="/Admin/ProductDetail/UpdateProductDetail/@item.ProductId" class="btn btn-info"><i class="fa fa-info-circle"></i> Açıklama ve Bilgi</a></td>
                                 </tr>
                             }
                         </tbody>
                     </table>
-                    <a href="/Admin/Product/CreateProduct/" class="btn btn-primary">Yeni Ürün Girişi</a>
+                    <a href="/Admin/Product/CreateProduct/" class="btn btn-primary"><i class="fa fa-plus"></i> Yeni Ürün Girişi</a>
                 </div>
             </div>
         </div>

@@ -18,13 +18,13 @@ namespace MultiShop.WebUI.Consumers
 
         public async Task Consume(ConsumeContext<ProductNameChangedEvent> context)
         {
-            //var message = context.Message;
+            var message = context.Message;
 
             //// Mesajı işleyin
             //Console.WriteLine($"ProductId: {message.ProductId}");
             //Console.WriteLine($"UpdatedName: {message.UpdatedName}");
             //Console.WriteLine($"UpdatedPrice: {message.UpdatedPrice}");
-
+        
             var token = await _identityService.GetToken();
 
             // Token'ı service katmanına geçerek basket verilerini al
@@ -44,10 +44,10 @@ namespace MultiShop.WebUI.Consumers
                 }
 
             }
-
+           
             await _basketService.SaveBasket(basketItems,token);
 
-
+           
         }
     }
 }

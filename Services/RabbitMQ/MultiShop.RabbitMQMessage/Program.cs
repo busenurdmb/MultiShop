@@ -4,12 +4,13 @@ using MultiShop.RabbitMQMessage.Services;
 var builder = WebApplication.CreateBuilder(args);
 // RabbitMQ ve MassTransit yapýlandýrmasý (message consumer)
 
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-    {
-        opt.Authority = builder.Configuration["IdentityServerUrl"];
-        opt.Audience = "ResourceRabbit";
-        opt.RequireHttpsMetadata = false;
-    });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceRabbit";
+    opt.RequireHttpsMetadata = false;
+});
+
 // Add services to the container.
 builder.Services.AddScoped<IRabbitMQService, RabbitMQService>();
 builder.Services.AddControllers();
