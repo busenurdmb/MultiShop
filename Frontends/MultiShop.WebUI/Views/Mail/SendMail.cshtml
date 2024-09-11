@@ -1,0 +1,33 @@
+﻿
+@model MailRequest
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SendMail</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <br /><br />
+        <div class="alert alert-success"><h3>Mail Gönderme Sayfası</h3></div>
+        <form method="post">
+            <label>Alıcı Mail Adresi</label>
+            <input type="text" asp-for="ReceiverMail" class="form-control" />
+            <br/>
+            <label>Konu</label>
+            <input type="text" asp-for="Subject" class="form-control" />
+            <br/>
+            <label>Mesaj</label>
+            <input type="text" asp-for="MessageContent" class="form-control" />
+            <br/>
+            <button class="btn btn-success" type="submit">Gönder</button>
+        </form>
+    </div>
+</body>
+</html>

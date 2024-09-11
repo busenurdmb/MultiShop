@@ -10,40 +10,38 @@ namespace MultiShop.WebUI.Services.BasketServices
         {
             _httpClient = httpClient;
         }
-        public async Task AddBasketItem(BasketItemDto basketItemDto)
+    
+        public async Task AddBasketItem(BasketItemDto basketItemDto, string? token = null)
         {
-            // Geçerli sepeti (Basket) elde etmek için GetBasket() metodunu çağırıyor.
-            var values = await GetBasket();
+            // Geçerli sepeti al
 
-            // Sepet boş değilse (null değilse) aşağıdaki işlemleri yapıyor.
-            if (values != null)
+            var basket = await GetBasket(token);
+
+            if (basket == null)
             {
-                // Sepette aynı üründen var mı diye kontrol ediyor (ProductId'ye göre).
-                var existingItem = values.BasketItems.FirstOrDefault(x => x.ProductId == basketItemDto.ProductId);
+                // Sepet mevcut değilse, yeni bir sepet oluştur
+                basket = new BasketTotalDto();
+            }
 
-                if (existingItem == null)
-                {
-                    // Eğer ürün sepette yoksa, yeni ürün olarak sepete ekliyor.
-                    values.BasketItems.Add(basketItemDto);
-                }
-                else
-                {
-                    // Eğer ürün zaten sepette varsa, mevcut ürünün Quantity değerini artırıyor.
-                    existingItem.Quantity += basketItemDto.Quantity;
-                }
+            // Sepette aynı üründen var mı kontrol et
+            var existingItem = basket.BasketItems
+                .FirstOrDefault(x => x.ProductId == basketItemDto.ProductId);
+
+            if (existingItem == null)
+            {
+                // Ürün sepette yoksa, ekle
+                basket.BasketItems.Add(basketItemDto);
             }
             else
             {
-                // Sepet yoksa, yeni bir sepet oluşturup ürünü ekliyor.
-                values = new BasketTotalDto();
-                values.BasketItems.Add(basketItemDto);
+                // Ürün zaten sepetteyse, miktarını artır
+                existingItem.Quantity += basketItemDto.Quantity;
             }
 
-            // Son olarak, sepeti (values) kaydetmek için SaveBasket() metodunu çağırıyor.
-            await SaveBasket(values);
+            // Güncellenmiş sepeti kaydet
+            await SaveBasket(basket, token);
         }
-
-        public Task DeleteBasket(string userId)
+        public Task DeleteBasket(string userId, string? token = null)
         {
             throw new NotImplementedException();
         }
@@ -76,12 +74,13 @@ namespace MultiShop.WebUI.Services.BasketServices
             //return values;
         }
 
-        public async Task<bool> RemoveBasketItem(string productId)
+        public async Task<bool> RemoveBasketItem(string productId, string? token = null)
         {
-            var values = await GetBasket();
+            var values = await GetBasket(token);
             var deletedItem = values.BasketItems.FirstOrDefault(x => x.ProductId == productId);
+
             var result=values.BasketItems.Remove(deletedItem);
-            await SaveBasket(values);
+            await SaveBasket(values,token);
             return true;
         }
         public async Task SaveBasket(BasketTotalDto basketTotalDto, string? token = null)

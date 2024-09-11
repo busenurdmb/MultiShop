@@ -24,16 +24,37 @@ namespace MultiShop.WebUI.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Index1(CreateOrderAddressDto createOrderAddressDto)
+        //{
+        //    var values = await _userService.GetUserInfo();
+        //    createOrderAddressDto.UserId = values.Id;
+        //    createOrderAddressDto.Description = "aa";
+
+        //    await _orderAddressService.CreateOrderAddressAsync(createOrderAddressDto);
+
+        //    return RedirectToAction("Index", "Payment");
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> Index(CreateOrderAddressDto createOrderAddressDto)
+        public async Task<IActionResult> Index([FromBody] CreateOrderAddressDto createOrderAddressDto)
         {
+
             var values = await _userService.GetUserInfo();
             createOrderAddressDto.UserId = values.Id;
             createOrderAddressDto.Description = "aa";
+            //createOrderAddressDto.PaymentMethod = paymentMethod; // Ödeme yöntemi ekleniyor
 
             await _orderAddressService.CreateOrderAddressAsync(createOrderAddressDto);
 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return Json(new { success = true });
+            }
+
             return RedirectToAction("Index", "Payment");
         }
+
+
     }
 }

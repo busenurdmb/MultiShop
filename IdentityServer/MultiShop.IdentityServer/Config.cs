@@ -21,7 +21,7 @@ namespace MultiShop.IdentityServer
                 new ApiResource("ResourceOrder"){Scopes={"OrderFullPermission"}},
                  new ApiResource("ResourceCargo"){Scopes={ "CargoFullPermission" } },
                  new ApiResource("ResourceBasket"){Scopes={"BasketFullPermission"} },
-                 new ApiResource("ResourceComment"){Scopes={"CommentFullPermission"} },
+                 new ApiResource("ResourceComment"){Scopes={ "CommentFullPermission" } },
                  new ApiResource("ResourcePayment"){Scopes={ "PaymentFullPermission" } },
                  new ApiResource("ResourceImage"){Scopes={ "ImageFullPermission" } },
                  new ApiResource("ResourceOcelot"){Scopes={"OcelotFullPermission"} },
@@ -68,7 +68,7 @@ namespace MultiShop.IdentityServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("multishopsecret".Sha256()) },
 
-                    AllowedScopes = { "CatalogReadPermission", "CatalogFullPermission", "OcelotFullPermission","CommentFullPermission", "ImageFullPermission", "BasketFullPermission", "RabbitFullPermission" }
+                    AllowedScopes = { "CatalogReadPermission", "CatalogFullPermission", "OcelotFullPermission", "CommentFullPermission", "ImageFullPermission", "BasketFullPermission", "RabbitFullPermission" }
                 },
 
                 //Manager

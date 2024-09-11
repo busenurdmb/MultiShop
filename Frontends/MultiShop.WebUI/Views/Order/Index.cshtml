@@ -10,7 +10,7 @@
         <div class="col-lg-8">
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sipariş Teslimat ve Fatura Adresiniz</span></h5>
             <div class="bg-light p-30 mb-5">
-                <form method="post">
+                <form method="post" id="orderAddressForm">
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Adınız</label>
@@ -63,7 +63,41 @@
 
             @await Component.InvokeAsync("_OrderSummaryComponentPartial")
 
-            @await Component.InvokeAsync("_PaymentMethodComponentPartial")
+       
+            @await Component.InvokeAsync("_PaymentMethodComponentPartial") 
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#paymentSubmit").click(function () {
+            // Formdan adres verilerini al
+            var formData = $("#orderAddressForm").serializeArray();
+            var addressData = {};
+            $.each(formData, function (i, field) {
+                addressData[field.name] = field.value;
+            });
+            console.log("Address Data: ", addressData); // Debug log
+
+            // Verileri AJAX ile gönder
+            $.ajax({
+                url: "/Order/Index",
+                type: 'POST',
+                contentType: 'application/json', // JSON formatında veri gönderiyoruz
+                data: JSON.stringify(addressData), // JSON formatına dönüştür
+                success: function (response) {
+                    // Başarı durumunda ödeme sayfasına yönlendir
+                    console.log("Response: ", response); // Debug log
+                    if (response.success) {
+                        window.location.href = '@Url.Action("Index", "Payment")';
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Bir hata oluştu: ' + error);
+                }
+            });
+        });
+    });
+</script>
